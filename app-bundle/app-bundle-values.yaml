@@ -1,0 +1,39 @@
+cluster:
+  name: frontend-dev
+  address: https://kubernetes.default.svc
+appBundle:
+  targetRevision: main
+values: |
+  global:
+    prediktor:
+      domain: frontend.dev.powerview.io
+    clusterOutboundIpAddress: "81.166.54.205"
+    vswh:
+      annotations: &vault-annotations
+        vault.security.banzaicloud.io/vault-addr: https://vault.ops.powerview.io
+        vault.security.banzaicloud.io/vault-path: kubernetes-frontend-dev
+        vault.security.banzaicloud.io/vault-role: powerview-frontend-dev
+        vault.security.banzaicloud.io/vault-skip-verify: "true"
+  postgres:
+    enabled: true
+    targetRevision: 12.1.15
+    commonAnnotations:
+      *vault-annotations
+    global:
+      postgresql:
+        auth:
+          postgresPassword: vault:powerview-frontend-dev/data/psql#password
+    primary:
+      extendedConfiguration: |
+        max_connections = 2000
+  preInstall:
+    enabled: true
+    grafana:
+      clientId: vault:powerview-frontend-dev/data/SP-Grafana#application_id
+      clientSecret: vault:powerview-frontend-dev/data/SP-Grafana#value
+      adminUser: vault:powerview-frontend-dev/data/grafana#adminUser
+      adminPassword: vault:powerview-frontend-dev/data/grafana#adminPassword
+    certManagerAzure:
+      clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure-client-secret.json
+    externalDNS:
+      clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure.json

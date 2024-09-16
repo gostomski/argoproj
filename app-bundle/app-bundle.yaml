@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: app-bundle
+  namespace: argocd
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+  - git:
+      repoURL: https://github.com/PrediktorAS/argo-cd.git
+      revision: frontend-dev
+      files:
+      - path: "app-bundle/app-bundle-values.yaml"
+  template:
+    metadata:
+      name: '{{cluster.name}}-app-bundle'
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          values: |-
+            {{values}}
+        repoURL: https://github.com/PrediktorAS/prediktor-helm-charts
+        targetRevision: '{{appBundle.targetRevision}}'
+        path: charts/app-bundle
+      destination:
+        server: '{{cluster.address}}'
+        namespace: argocd
+      ignoreDifferences:
+      - group: "apps"
+        kind: "StatefulSet"
+        jsonPointers:
+        - /spec/template/metadata/annotations
+        - /spec/volumeClaimTemplates
+        - /spec/persistentVolumeClaimRetentionPolicy
+        - /webhooks
+      - group: ""
+        kind: "Secret"
+        jqPathExpressions:
+        - .data[]
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - ServerSideApply=false
+        - RespectIgnoreDifferences=true
+        - ApplyOutOfSyncOnly=true
