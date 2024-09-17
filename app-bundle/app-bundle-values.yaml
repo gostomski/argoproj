@@ -27,7 +27,7 @@ values: |
           init.sh: |
             PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -h $HOSTNAME $POSTGRES_DB <<EOF
             DO
-            $do$
+            \$do\$
             BEGIN
               IF NOT EXISTS (
                   SELECT FROM pg_catalog.pg_roles WHERE rolname = 'FrontendTwin'
@@ -35,7 +35,7 @@ values: |
                   CREATE ROLE "FrontendTwin" LOGIN PASSWORD '${POSTGRES_PASSWORD}';
               END IF;
             END
-            $do$;
+            \$do\$;
             EOF
   preInstall:
     enabled: false
