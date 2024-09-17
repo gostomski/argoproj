@@ -23,6 +23,7 @@ values: |
           postgresPassword: vault:powerview/data/psql#password
     primary:
       initdb:
+        extraEnvVarsSecret: frontendtwin-secret
         scripts:
           init.sh: |
             PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -h 127.0.0.1 $POSTGRES_DB <<EOF
@@ -32,7 +33,7 @@ values: |
               IF NOT EXISTS (
                   SELECT FROM pg_catalog.pg_roles WHERE rolname = 'FrontendTwin'
               ) THEN
-                  CREATE ROLE "FrontendTwin" LOGIN PASSWORD '${POSTGRES_PASSWORD}';
+                  CREATE ROLE "FrontendTwin" LOGIN PASSWORD '${FRONTENDTWIN_PASSWORD}';
               END IF;
             END
             \$do\$;
