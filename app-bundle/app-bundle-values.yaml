@@ -25,7 +25,7 @@ values: |
       initdb:
         scripts:
           init.sql: |
-            CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION;
+            CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1;
   preInstall:
     enabled: false
     grafana:
