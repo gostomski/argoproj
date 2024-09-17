@@ -25,14 +25,14 @@ values: |
       initdb:
         scripts:
           init.sh: |
-            PGPASSWORD=$POSTGRES_PASSWORD psql -v password_to_save=$POSTGRES_PASSWORD  -U postgres -h $HOSTNAME $POSTGRES_DB <<EOF
+            PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -h $HOSTNAME $POSTGRES_DB <<EOF
             DO
             \$do\$
             BEGIN
               IF NOT EXISTS (
                   SELECT FROM pg_catalog.pg_roles WHERE rolname = 'FrontendTwin'
               ) THEN
-                  CREATE ROLE "FrontendTwin" LOGIN PASSWORD :'password_to_save';
+                  CREATE ROLE "FrontendTwin" LOGIN PASSWORD '${POSTGRES_PASSWORD}';
               END IF;
             END
             \$do\$;
