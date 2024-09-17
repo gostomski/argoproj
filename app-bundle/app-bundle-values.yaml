@@ -25,7 +25,7 @@ values: |
       initdb:
         scripts:
           init.sql: |
-            CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'test123';
+            CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'vault:powerview/data/psql#password';
             CREATE USER helm2;
             CREATE DATABASE helm2;
   preInstall:
