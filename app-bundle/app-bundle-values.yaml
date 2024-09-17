@@ -25,17 +25,11 @@ values: |
       extendedConfiguration: |
         max_connections = 2000
       initdb:
-        scriptsSecret: |
-          CREATE ROLE "FrontendTwin" WITH
-          LOGIN
-          NOSUPERUSER
-          CREATEDB
-          NOCREATEROLE
-          INHERIT
-          NOREPLICATION
-          CONNECTION LIMIT -1
-          PASSWORD 'test123';
-          GRANT "FrontendTwin" TO psqladmin WITH ADMIN OPTION;
+        scripts:
+          init.sql: |
+            CREATE USER helm;
+            CREATE DATABASE helm;
+            GRANT ALL PRIVILEGES ON DATABASE helm TO helm;
   preInstall:
     enabled: false
     grafana:
