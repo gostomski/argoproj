@@ -23,7 +23,7 @@ values: |
           postgresPassword: vault:powerview/data/psql#password
     primary:
       initdb:
-        scriptsSecret: "create-role-frontendtwin"
+        scriptsSecret: create-role-frontendtwin
   preInstall:
     enabled: false
     grafana:
