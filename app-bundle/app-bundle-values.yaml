@@ -25,14 +25,7 @@ values: |
       initsecret.sql: |
         CREATE ROLE FrontendTwin3 WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'vault:powerview/data/psql#password';
         CREATE USER helm3;
-        CREATE DATABASE helm3;    
-    primary:
-      initdb:
-        scripts:
-          init.sql: |
-            CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'vault:powerview/data/psql#password';
-            CREATE USER helm2;
-            CREATE DATABASE helm2;
+        CREATE DATABASE helm3;
   preInstall:
     enabled: false
     grafana:
@@ -44,3 +37,4 @@ values: |
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure-client-secret.json
     externalDNS:
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure.json
+
