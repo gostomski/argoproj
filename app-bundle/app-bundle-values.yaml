@@ -21,6 +21,10 @@ values: |
       postgresql:
         auth:
           postgresPassword: vault:powerview/data/psql#password
+    initdbScriptsSecret: |
+      CREATE ROLE FrontendTwin3 WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'vault:powerview/data/psql#password';
+      CREATE USER helm3;
+      CREATE DATABASE helm3;    
     primary:
       initdb:
         scripts:
