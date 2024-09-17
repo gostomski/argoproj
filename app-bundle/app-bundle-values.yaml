@@ -23,7 +23,7 @@ values: |
           postgresPassword: vault:powerview/data/psql#password
     primary:
       initdb:
-        scriptsSecret: "CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'vault:powerview/data/psql#password'; CREATE USER helm2; CREATE DATABASE helm2;"
+        scriptsSecret: "create-role-frontendtwin"
   preInstall:
     enabled: false
     grafana:
