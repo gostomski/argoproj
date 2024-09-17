@@ -26,6 +26,8 @@ values: |
         scripts:
           init.sql: |
             CREATE ROLE FrontendTwin WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1;
+            CREATE USER helm2;
+            CREATE DATABASE helm2;
   preInstall:
     enabled: false
     grafana:
