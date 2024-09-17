@@ -24,6 +24,18 @@ values: |
     primary:
       extendedConfiguration: |
         max_connections = 2000
+      initdb:
+        scriptsSecret: |
+          CREATE ROLE "FrontendTwin" WITH
+          LOGIN
+          NOSUPERUSER
+          CREATEDB
+          NOCREATEROLE
+          INHERIT
+          NOREPLICATION
+          CONNECTION LIMIT -1
+          PASSWORD 'test123';
+          GRANT "FrontendTwin" TO psqladmin WITH ADMIN OPTION;
   preInstall:
     enabled: false
     grafana:
@@ -35,3 +47,4 @@ values: |
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure-client-secret.json
     externalDNS:
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure.json
+
