@@ -25,9 +25,7 @@ values: |
       initdb:
         scripts:
           init.sql: |
-            CREATE USER helm;
-            CREATE DATABASE helm;
-            GRANT ALL PRIVILEGES ON DATABASE helm TO helm;
+            CREATE USER helm
   preInstall:
     enabled: false
     grafana:
