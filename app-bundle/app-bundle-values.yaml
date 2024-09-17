@@ -25,7 +25,7 @@ values: |
       initdb:
         scripts:
           init.sh: |
-            PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -h $HOSTNAME $POSTGRES_DB <<EOF
+            PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -h 127.0.0.1 $POSTGRES_DB <<EOF
             DO
             \$do\$
             BEGIN
