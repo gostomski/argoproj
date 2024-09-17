@@ -24,7 +24,7 @@ values: |
     primary:
       initdb:
         scripts:
-          init.sql: |
+          init.sh: |
             PGPASSWORD=$POSTGRES_PASSWORD psql -v password_to_save=$POSTGRES_PASSWORD  -U postgres -h $HOSTNAME $POSTGRES_DB <<EOF
             DO
             \$do\$
