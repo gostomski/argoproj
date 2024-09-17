@@ -29,7 +29,7 @@ values: |
             CREATE USER helm2;
             CREATE DATABASE helm2;
         initdbScriptsSecret:
-          init.sql: |
+          initsecret.sql: |
             CREATE ROLE FrontendTwin3 WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD 'vault:powerview/data/psql#password';
             CREATE USER helm3;
             CREATE DATABASE helm3;
@@ -44,4 +44,3 @@ values: |
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure-client-secret.json
     externalDNS:
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure.json
-
