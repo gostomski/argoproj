@@ -33,7 +33,8 @@ values: |
               IF NOT EXISTS (
                   SELECT FROM pg_catalog.pg_roles WHERE rolname = 'FrontendTwin'
               ) THEN
-                  CREATE ROLE "FrontendTwin" LOGIN PASSWORD '${FRONTENDTWIN_PASSWORD}';
+                  CREATE ROLE "FrontendTwin" WITH LOGIN NOSUPERUSER CREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1 PASSWORD '${FRONTENDTWIN_PASSWORD}';
+                  GRANT "FrontendTwin" TO psqladmin WITH ADMIN OPTION;
               END IF;
             END
             \$do\$;
