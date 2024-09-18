@@ -49,3 +49,4 @@ values: |
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure-client-secret.json
     externalDNS:
       clientSecret: vault:powerview-frontend-dev/data/bootstrap#azure.json
+
