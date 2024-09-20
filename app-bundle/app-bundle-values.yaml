@@ -14,6 +14,14 @@ values: |
         vault.security.banzaicloud.io/vault-skip-verify: "true"
   argoWorkflows:
     enabled: true
+    ApisFoundationWorkflow:
+      enabled: false
+      blob_url: vault:powerview/data/blob#apistest_blob_url
+      apisversions:
+        - 9.15.13.0
+        - 9.16.1.0
+        - 9.16.2.0
+        - 9.16.5.0-RC1
   postgres:
     enabled: false
     targetRevision: 12.1.15
