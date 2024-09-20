@@ -15,7 +15,7 @@ values: |
   argoWorkflows:
     enabled: true
     ApisFoundationWorkflow:
-      enabled: false
+      enabled: true
       blob_url: vault:powerview/data/blob#apistest_blob_url
       apisversions:
         - 9.15.13.0
