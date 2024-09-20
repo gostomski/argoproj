@@ -2,7 +2,7 @@ cluster:
   name: frontend-dev
   address: https://kubernetes.default.svc
 appBundle:
-  targetRevision: main
+  targetRevision: feature/apis-foundation-wokrflow-initcontainer
 values: |
   global:
     prediktor:
@@ -12,8 +12,10 @@ values: |
         vault.security.banzaicloud.io/vault-addr: http://vault.vault.svc.cluster.local:8200
         vault.security.banzaicloud.io/vault-role: powerview
         vault.security.banzaicloud.io/vault-skip-verify: "true"
-  postgres:
+  argoWorkflows:
     enabled: true
+  postgres:
+    enabled: false
     targetRevision: 12.1.15
     commonAnnotations:
       *vault-annotations
