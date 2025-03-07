@@ -9,6 +9,9 @@ helmCharts:
   version: 1.0.0
   valuesFile: values.yaml
 
+resources:
+- job.yaml
+
 patches:
 - path: patches/node_affinity_deployment.yaml
   target:
