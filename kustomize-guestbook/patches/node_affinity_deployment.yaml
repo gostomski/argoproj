@@ -10,7 +10,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: <key from node labels>
+              - key: kubernetes.io/os
                 operator: In
                 values:
-                - <value to match>
+                - linux
