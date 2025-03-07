@@ -5,7 +5,7 @@ helmCharts:
 - name: mergestat
   repo: https://helm.mergestat.com/
   releaseName: mergestat
-  namespace: admin
+  namespace: prediktor
   version: 0.1.0
   valuesFile: values.yaml
 
