@@ -1,0 +1,64 @@
+# Example values.yaml file
+worker:
+  replicaCount: 1
+  image:
+    repository: mergestat/worker
+    pullPolicy: Always
+  env:
+  - name: POSTGRES_CONNECTION
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-postgresql
+        key: postgresql-uri
+  - name: CONCURRENCY
+    value: "3"
+  - name: ENCRYPTION_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-secrets
+        key: encryption-secret
+
+graphql:
+  replicaCount: 1
+  image:
+    repository: mergestat/graphql
+    pullPolicy: Always
+  env:
+  - name: POSTGRES_CONNECTION
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-postgresql
+        key: postgresql-uri
+  - name: JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-secrets
+        key: jwt-secret
+  - name: ENCRYPTION_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-secrets
+        key: encryption-secret
+
+ui:
+  replicaCount: 1
+  image:
+    repository: mergestat/console
+    pullPolicy: Always
+  env:
+  - name: POSTGRAPHILE_API
+    value: http://mergestat-graphql:5433/graphql
+  - name: POSTGRES_CONNECTION
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-postgresql
+        key: postgresql-uri
+  - name: JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: mergestat-secrets
+        key: jwt-secret
+
+postgresql:
+  # https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+  enabled: false
