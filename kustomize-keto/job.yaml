@@ -1,0 +1,22 @@
+---
+# Source: my-job-chart/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kratos-keto-init
+  namespace: prediktor
+  labels:
+    app: kratos-keto-init
+spec:
+  template:
+    metadata:
+      labels:
+        app: kratos-keto-init
+    spec:
+      containers:
+        - name: kratos-keto-init
+          image: acrdevprediktor.azurecr.io/keto-kratos-setup:v0.1
+      restartPolicy: Never
+      imagePullSecrets:
+      - name: acrdevprediktor-secret
+  backoffLimit: 2
